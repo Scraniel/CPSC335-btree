@@ -3,8 +3,10 @@ package cpsc335a2;
 public class Bnode {
 
 	int keys[];
-	Bnode pointers[];
 	int numEntries;
+	Bnode pointers[];
+	Bnode parent;
+	
 	
 	public Bnode()
 	{
@@ -34,19 +36,40 @@ public class Bnode {
 		// We're at a leaf, so insert
 		else
 		{
-			// Move values
-			for(int j = numEntries - 1; j >= i && j >= 0; j--)
-				keys[j + 1] = keys[j];
+			shiftDown(keys, i);
 			keys[i] = key;
-			
 			numEntries++;
 			return true;
 		}
 	}
 	
-	// Split the current node and move a key up
+	private void shiftDown(int keys[], int start)
+	{
+		// Move values
+		for(int j = numEntries - 1; j >= start && j >= 0; j--)
+			keys[j + 1] = keys[j];
+	}
+	
+	// Split the child node and move a key up
 	public void overflow(int key)
 	{
+		int values[] = new int[5];
+		int i;
+		boolean inserted = false;
+		for(i = 0; i < numEntries; i++)
+		{
+			if(key < keys[i] && !inserted)
+			{
+				values[i] = key;
+				inserted = true;
+				i--;
+			}
+			else
+				values[i] = keys[i];
+		}
+		
+		//index 0 and 1 go in left, 2 moves up, 3 and 4 go right.
+		// HOW THE SHIT DO I CONNECT THE POINTERS
 		
 	}
 	
