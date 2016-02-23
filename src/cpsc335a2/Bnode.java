@@ -44,6 +44,14 @@ public class Bnode {
 		}
 	}
 	
+	// Split the current node and move a key up
+	public void overflow(int key)
+	{
+		
+	}
+	
+	
+	
 	public void print()
 	{
 		print(0);
